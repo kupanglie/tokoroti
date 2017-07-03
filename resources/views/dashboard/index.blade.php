@@ -114,7 +114,33 @@ Toko Roti
         <div id="absence" class="tab-pane fade in">
           <div class="row" style="margin-top: 20px">
             <table class="table table-bordered">
-              
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  @foreach($worker_lists as $worker_list)
+                    <th class="text-center">{{ $worker_list->name }}</th>
+                  @endforeach
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($dates as $indexData => $date)
+                <tr>
+                  <td>{{ date('d - m - Y', strtotime($date)) }}</td>
+                  @foreach($worker_lists as $worker_list)
+                  <?php $counter = 0; ?>
+                    @foreach($transactions as $transaction)
+                      @if($transaction->date == $date && ($transaction->worker_id_1 == $worker_list->id || $transaction->worker_id_2 == $worker_list->id))
+                        <td class="text-center"><span><i class="fa fa-check"></i></span></td>
+                        <?php $counter += 1; ?>
+                      @endif
+                    @endforeach
+                    @if($counter == 0)
+                      <td class="text-center"><span><i class="fa fa-minus"></i></span></td>
+                    @endif  
+                  @endforeach 
+                </tr>
+                @endforeach
+              </tbody>
             </table>
           </div>
         </div>

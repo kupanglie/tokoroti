@@ -179,9 +179,9 @@ class DashboardController extends Controller
         $car_lists = DB::table('cars')->orderBy('id', 'asc')->get();
 
         /** Absence **/
+        $worker_lists = DB::table('workers')->get();
         
-        
-        return view('dashboard.index', compact('transactions', 'chartTransaction', 'date_transaction', 'dates', 'dropoffStores', 'dataDropoffStores', 'car_lists'));
+        return view('dashboard.index', compact('transactions', 'chartTransaction', 'date_transaction', 'dates', 'dropoffStores', 'dataDropoffStores', 'car_lists', 'worker_lists'));
     }
 
     /**
